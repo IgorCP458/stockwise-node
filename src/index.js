@@ -1,8 +1,18 @@
 const express = require("express");
 const sequelize = require("./database/database");
 const app = express()
-
+const bodyParser = require('body-parser')
+app.use(express.json());
+app.use(require('body-parser').json());
+const cors = require('cors');
+app.use(cors());  
 require('dotenv').config()
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded())
+
+// parse application/json
+app.use(bodyParser.json())
 
 // Conectando ao Banco de Dados
 ;(async () => {

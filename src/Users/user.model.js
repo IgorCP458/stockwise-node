@@ -16,7 +16,7 @@ const User = sequelize.define('User', {
     allowNull: false
   },
   password: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false
   },
   role: {
@@ -25,5 +25,4 @@ const User = sequelize.define('User', {
   },
 })
 
-User.sync({force: true})
 module.exports = User;
