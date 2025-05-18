@@ -2,10 +2,15 @@ const express = require("express");
 const sequelize = require("./database/database");
 const app = express()
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 app.use(express.json());
 app.use(require('body-parser').json());
 const cors = require('cors');
-app.use(cors());  
+app.use(cors({
+  origin: 'http://localhost:5173', // ou '*', com cautela
+  credentials: true // permite cookies entre domínios
+}));  
 require('dotenv').config()
 
 // parse application/x-www-form-urlencoded
