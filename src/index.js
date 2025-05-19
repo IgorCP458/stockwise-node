@@ -3,6 +3,7 @@ const sequelize = require("./database/database");
 const app = express()
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 app.use(cookieParser());
 app.use(express.json());
 app.use(require('body-parser').json());
@@ -36,6 +37,18 @@ const User = require('./Users/user.model')
 const userRouter = require('./Users/user.routes');
 app.use('/', userRouter)
 
+
+
+app.get('/api/auth/check', (req, res) => {
+  const token = req.cookies.token;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return res.json({ loggedIn: true, user: decoded }); // pode retornar o nome ou e-mail também
+  } catch (err) {
+    return res.status(401).json({ loggedIn: false });
+  }
+});
 
 app.get('/', (req, res) => {
   res.send("Olá mundo!")

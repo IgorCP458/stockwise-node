@@ -29,7 +29,7 @@ const handleUserLogin = async (email, password,res) => {
       httpOnly: true,       // Protege contra XSS
       secure: false,         // só envia por HTTPS (em produção)
       sameSite: 'Strict',   // evita CSRF
-      maxAge: 60 * 60 * 1000 // 1 hora
+      maxAge: 15 * 1 * 1000 // 1 hora
     }).json({ message: 'Login com sucesso' });
 
   }
